@@ -1,0 +1,79 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+    <div class="row divider red">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner menu">
+        <div class="col-sm-12 col-md-10 padding-none">
+            <h1>My Profile</h1>
+        </div>
+        <div class="col-sm-offset-10 col-sm-2 col-md-2">
+            <figure class="profile">
+                <h4> {{ session.username }} </h4>
+                <img src="{{ session.picture }}" alt="Your profile picture">
+                <figcaption> {{ session.email }} </figcaption>
+                <a href="{{url_for('disconnect')}}">
+    				<button class="btn btn-default logout" id="delete-restaurant">
+    					Logout
+    				</button>
+    			</a>
+            </figure>
+            </h1>
+        </div>
+    </div>
+
+
+	<div class="header row">
+		<div class="col-md-12 padding-top">
+            <h2> My Restaurants: </h2>
+        </div>
+    </div>
+
+    <div class"restaurants row">
+        {% if restaurants %}
+
+            {% for restaurant in restaurants %}
+        		<a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}">
+        			<div class="row">
+        				<div class="col-md-1"></div>
+        					<div class="col-md-10 restaurant-list">
+        						<h2>{{restaurant.name}}</h2>
+        						<p class="more-info"> View Restaurant Menu </p>
+        					</div>
+        				<div class="col-md-1"></div>
+        			</div>
+        		</a>
+        	{% endfor %}
+
+
+        	<div class="row padding-top padding-bottom">
+        		<div class="col-md-1"></div>
+        		<div class="col-md-10 padding-none text-center">
+        			<a href="{{url_for('newRestaurant')}}">
+        				<button class="btn btn-default" id="new-restaurant">
+        				Add Restaurant
+        				</button>
+        			</a>
+        		</div>
+        		<div class="col-md-1"></div>
+        	</div>
+
+        {% else %}
+
+            <div class="no-restaurants row">
+                <div class="col-md-1"></div>
+                    <div class="col-md-10 restaurant-list">
+                        <h3 class="notice">Nothing to show yet!</h3>
+                        <a href="{{url_for('newRestaurant')}}">
+                            <button class="btn btn-default" id="new-restaurant">
+                            Create a New Restaurant
+                            </button>
+                        </a>
+                    </div>
+                <div class="col-md-1"></div>
+            </div>
+        {% endif %}
+	</div>
+{% endblock %}

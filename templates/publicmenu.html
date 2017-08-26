@@ -1,0 +1,79 @@
+{% extends "main.html" %}
+{% block content %}
+
+{% if user %}
+	{% include "header.html" %}
+{% else %}
+	{% include "publicheader.html" %}
+{% endif %}
+
+	<div class="row divider red">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-sm-12 col-md-10 padding-none">
+			<h1>{{ restaurant.name }}
+		</div>
+		<div class="col-sm-offset-10 col-sm-2 col-md-2">
+			<figure class="creator">
+				<h4> Posted By: </h4>
+				<img src="{{ restaurant.user.picture }}">
+				<figcaption> {{ restaurant.user.name }} </figcaption>
+			</figure>
+			</h1>
+		</div>
+	</div>
+
+	{% if items !=[] %}
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<h2 class="menu-head">Appetizers</h2>
+					{% for i in items %}
+						{% if i.course == 'Appetizer' %}
+							<div class="menu-item">
+								<h3>{{i.name}}</h3>
+								<p>{{i.description}}</p>
+								<p class="menu-price">{{i.price}}</p>
+							</div>
+						{% endif %}
+					{% endfor %}
+			</div>
+			<div class="col-md-4">
+				<h2 class="menu-head">Entrees</h2>
+					{% for i in items %}
+						{% if i.course == 'Entree' %}
+						<div class="menu-item">
+							<h3>{{i.name}}</h3>
+							<p>{{i.description}}</p>
+							<p class="menu-price">{{i.price}}</p>
+						</div>
+						{% endif %}
+					{% endfor %}
+			</div>
+			<div class="col-md-3">
+				<h2 class="menu-head">Desserts</h2>
+					{% for i in items %}
+						{% if i.course == 'Dessert' %}
+						<div class="menu-item text-cen">
+							<h3>{{i.name}}</h3>
+							<p>{{i.description}}</p>
+							<p class="menu-price">{{i.price}}</p>
+						</div>
+						{% endif %}
+					{% endfor %}
+				<h2 class="menu-head">Beverages</h2>
+					{% for i in items %}
+						{% if i.course == 'Beverage' %}
+						<div class="menu-item">
+							<h3>{{i.name}}</h3>
+							<p>{{i.description}}</p>
+							<p class="menu-price">{{i.price}}</p>
+						</div>
+						{% endif %}
+					{% endfor %}
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}
+{% endblock %}
